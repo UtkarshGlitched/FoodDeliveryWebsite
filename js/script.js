@@ -1,12 +1,16 @@
 const products = [
-  {id:1,title:'Margherita Pizza',price:7.99,image:'https://images.unsplash.com/photo-1604382355076-af4b0eb60143?w=400',desc:'Classic cheese & tomato pizza with fresh basil',time:25,rating:4.5,cuisine:'Italian',restaurant:'Pizza Palace'},
-  {id:2,title:'Paneer Butter Masala',price:8.5,image:'https://images.unsplash.com/photo-1601050690597-df0568f70950?w=400',desc:'Creamy tomato-based curry with soft paneer cubes',time:30,rating:4.7,cuisine:'Indian',restaurant:'Spice Garden'},
-  {id:3,title:'Sushi Platter',price:14.99,image:'https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?w=400',desc:'Assorted sushi with fresh salmon and tuna',time:40,rating:4.8,cuisine:'Japanese',restaurant:'Tokyo Sushi'},
-  {id:4,title:'Cheeseburger',price:6.99,image:'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400',desc:'Grilled beef patty with cheese and special sauce',time:20,rating:4.4,cuisine:'American',restaurant:'Burger Barn'},
-  {id:5,title:'Caesar Salad',price:5.5,image:'https://images.unsplash.com/photo-1550304943-4f24f54ddde9?w=400',desc:'Crisp romaine with parmesan and croutons',time:15,rating:4.2,cuisine:'Healthy',restaurant:'Green Bowl'},
-  {id:6,title:'Pad Thai',price:9.5,image:'https://images.unsplash.com/photo-1559314809-0d155014e29e?w=400',desc:'Stir-fried rice noodles with tamarind and peanuts',time:30,rating:4.6,cuisine:'Thai',restaurant:'Thai Delight'},
-  {id:7,title:'Chicken Biryani',price:10.99,image:'https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=400',desc:'Aromatic basmati rice with spiced chicken',time:35,rating:4.9,cuisine:'Indian',restaurant:'Spice Garden'},
-  {id:8,title:'Tacos',price:7.99,image:'https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=400',desc:'Crispy tortillas with seasoned beef and toppings',time:20,rating:4.5,cuisine:'Mexican',restaurant:'Taco Town'}
+  {id:1,title:'Paneer Butter Masala',price:299,image:'https://images.unsplash.com/photo-1601050690597-df0568f70950?w=400',desc:'Creamy tomato-based curry with soft paneer cubes',time:30,rating:4.7,cuisine:'Indian',restaurant:'Spice Garden'},
+  {id:2,title:'Chicken Biryani',price:349,image:'https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=400',desc:'Aromatic basmati rice with spiced chicken',time:35,rating:4.9,cuisine:'Indian',restaurant:'Spice Garden'},
+  {id:3,title:'Dal Makhani',price:249,image:'https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=400',desc:'Creamy black lentil curry with butter',time:25,rating:4.6,cuisine:'Indian',restaurant:'Spice Garden'},
+  {id:4,title:'Butter Chicken',price:399,image:'https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=400',desc:'Tender chicken in creamy tomato gravy',time:30,rating:4.8,cuisine:'Indian',restaurant:'Spice Garden'},
+  {id:5,title:'Samosa (3 pcs)',price:80,image:'https://images.unsplash.com/photo-1601050690597-df0568f70950?w=400',desc:'Crispy pastry with spiced potato filling',time:15,rating:4.5,cuisine:'Indian',restaurant:'Spice Garden'},
+  {id:6,title:'Palak Paneer',price:279,image:'https://images.unsplash.com/photo-1601050690597-df0568f70950?w=400',desc:'Spinach curry with paneer cubes',time:25,rating:4.6,cuisine:'Indian',restaurant:'Spice Garden'},
+  {id:7,title:'Chole Bhature',price:199,image:'https://images.unsplash.com/photo-1626132647523-66dbeac34534?w=400',desc:'Spiced chickpea curry with fluffy bread',time:25,rating:4.7,cuisine:'Indian',restaurant:'Spice Garden'},
+  {id:8,title:'Tandoori Chicken',price:449,image:'https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=400',desc:'Yogurt-marinated chicken grilled in tandoor',time:35,rating:4.9,cuisine:'Indian',restaurant:'Spice Garden'},
+  {id:9,title:'Aloo Gobi',price:229,image:'https://images.unsplash.com/photo-1601050690597-df0568f70950?w=400',desc:'Potato and cauliflower curry',time:20,rating:4.4,cuisine:'Indian',restaurant:'Spice Garden'},
+  {id:10,title:'Dosa',price:150,image:'https://images.unsplash.com/photo-1668236543090-82eba5ee5976?w=400',desc:'Crispy rice pancake with coconut chutney',time:20,rating:4.6,cuisine:'Indian',restaurant:'Spice Garden'},
+  {id:11,title:'Idli Sambar (4 pcs)',price:120,image:'https://images.unsplash.com/photo-1668236543090-82eba5ee5976?w=400',desc:'Steamed rice cakes with lentil soup',time:15,rating:4.5,cuisine:'Indian',restaurant:'Spice Garden'},
+  {id:12,title:'Naan (2 pcs)',price:80,image:'https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=400',desc:'Soft tandoor-baked flatbread',time:10,rating:4.7,cuisine:'Indian',restaurant:'Spice Garden'}
 ];
 
 const $ = sel => document.querySelector(sel);
@@ -112,7 +116,7 @@ function renderProducts(){
           <div class="meta">${p.cuisine} • ${p.rating} ★ • ${p.time} mins</div>
           <div class="restaurant">${p.restaurant}</div>
           <div class="row">
-            <div class="price">$${p.price.toFixed(2)}</div>
+            <div class="price">₹${p.price}</div>
             <button class="add-btn" data-id="${p.id}">Add</button>
           </div>
         </div>
@@ -166,7 +170,7 @@ function updateCartUI(){
       <img src="${item.image}" alt="${item.title}" style="width:64px;height:48px;object-fit:cover;border-radius:6px">
       <div style="flex:1;padding-left:8px">
         <div style="font-weight:700">${item.title}</div>
-        <div style="font-size:13px;color:#666">$${item.price.toFixed(2)} × ${item.qty}</div>
+        <div style="font-size:13px;color:#666">₹${item.price} × ${item.qty}</div>
       </div>
       <div>
         <button data-remove="${item.id}" style="padding:4px 8px;font-size:12px">Remove</button>
@@ -174,7 +178,7 @@ function updateCartUI(){
     cartItemsEl.appendChild(li);
   });
   cartCount.textContent = cart.reduce((s,i)=>s+i.qty,0);
-  cartTotalEl.textContent = total.toFixed(2);
+  cartTotalEl.textContent = total;
 
   cartItemsEl.querySelectorAll('button[data-remove]').forEach(b=>{
     b.addEventListener('click',()=>removeFromCart(Number(b.dataset.remove)));
@@ -214,7 +218,7 @@ document.getElementById('checkout').addEventListener('click',()=>{
   orders.unshift(order);
   localStorage.setItem('foodies_home_orders', JSON.stringify(orders));
   
-  alert(`Order placed! Order ID: ${order.id}\nTotal: $${order.total.toFixed(2)}\nDelivery to: ${address}`);
+  alert(`Order placed! Order ID: ${order.id}\nTotal: ₹${order.total}\nDelivery to: ${address}`);
   cart = [];
   saveCart();
   updateCartUI();
@@ -229,7 +233,7 @@ function openModal(id){
   modalImg.alt = p.title;
   modalTitle.textContent = p.title;
   modalDesc.textContent = p.desc || '';
-  modalPrice.textContent = p.price.toFixed(2);
+  modalPrice.textContent = p.price;
   modal.setAttribute('aria-hidden','false');
 }
 
