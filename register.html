@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Create account — Foodie's Home</title>
+    <link rel="stylesheet" href="css/auth.css">
+  </head>
+  <body>
+    <main class="auth-root">
+      <div class="auth-card">
+        <div class="auth-visual">
+          <div class="overlay">
+            <div class="caption">
+              <h3>Join Foodie's Home</h3>
+              <p class="small">Save addresses • Quick reorder • Exclusive offers</p>
+            </div>
+          </div>
+        </div>
+        <div class="auth-form">
+          <h1>Create your Foodie's Home account</h1>
+          <p class="small">Simple steps to start ordering your favorites.</p>
+          <div class="stepper">
+            <div class="step active">1. Account</div>
+            <div class="step">2. Details</div>
+          </div>
+          <div class="social-row">
+            <div id="google-register-container" style="flex:1"></div>
+            <!-- fallback button for browsers without Google Identity or if no CLIENT_ID set -->
+            <button type="button" id="google-register" class="social-btn google" style="display:none">
+              <svg class="logo" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="#EA4335" d="M12 11.5v2.9h7.2c-.3 1.7-1.6 4-4.3 5.3l-0.1.1-3.2-.1c-3.4 0-6.2-2.8-6.2-6.3 0-3.5 2.8-6.3 6.2-6.3 2.1 0 3.6.9 4.4 1.7l1.9-1.9C17.5 3.6 14.9 2.5 12 2.5 7 2.5 3.2 6.3 3.2 11.3S7 20 12 20c3.1 0 5.4-1.1 6.9-2.7L12 11.5z"/></svg>
+              Continue with Google
+            </button>
+          </div>
+          <form id="register-form" novalidate>
+            <div class="field-with-icon">
+              <label for="fullname">Full name</label>
+              <input id="fullname" name="fullname" type="text" placeholder="John Doe" required>
+            </div>
+
+            <label for="phone">Phone number</label>
+            <div class="phone-group">
+              <select id="country-code">
+                <option value="+1">+1</option>
+                <option value="+44">+44</option>
+                <option value="+91" selected>+91</option>
+              </select>
+              <input id="phone" name="phone" type="tel" placeholder="123-456-7890" required>
+            </div>
+
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" placeholder="you@example.com" required>
+
+            <label for="password">Password</label>
+            <div style="position:relative">
+              <input id="password" name="password" type="password" placeholder="Create a password" required>
+              <button type="button" class="toggle-pass" id="toggle-password">Show</button>
+            </div>
+            <div class="strength"><i id="strength-bar"></i></div>
+            <div class="small">Use at least 6 characters — include letters and numbers for stronger passwords.</div>
+
+            <label for="confirm">Confirm password</label>
+            <input id="confirm" name="confirm" type="password" placeholder="Re-enter password" required>
+
+            <!-- Address removed for simpler signup; can be added later in profile -->
+
+            <div class="terms"><label><input type="checkbox" id="agree"> I agree to the <a href="#">Terms & Privacy</a></label></div>
+
+            <div id="error" class="error" aria-live="polite"></div>
+
+            <button type="submit" class="btn">Create your account</button>
+            <div style="margin-top:8px"><button type="button" class="btn-secondary" id="back-to-login">Back to sign in</button></div>
+          </form>
+
+          <div class="alt">Already have an account? <a href="login.html">Sign in</a></div>
+        </div>
+      </div>
+    </main>
+
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="js/config.js"></script>
+    <script src="js/google-auth.js"></script>
+    <script>
+      window.addEventListener('load', ()=>{
+        const inited = window.initGoogleSignIn && window.initGoogleSignIn();
+        if(!inited){
+          const fallback = document.getElementById('google-register'); if(fallback) fallback.style.display='inline-flex';
+        } else { const fallback = document.getElementById('google-register'); if(fallback) fallback.style.display='none'; }
+      });
+    </script>
+    <script src="js/register.js"></script>
+  </body>
+</html>

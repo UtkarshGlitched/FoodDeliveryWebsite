@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Foodie's Home</title>
+    <link rel="stylesheet" href="css/styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="brand">
+        <h1 class="logo"><a href="index.html">Foodie's Home</a></h1>
+        <div class="location">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C8.134 2 5 5.134 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.866-3.134-7-7-7z" stroke="#ff6b01" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <input id="location-input" placeholder="Enter delivery location" aria-label="Delivery location">
+        </div>
+        <div class="search">
+          <input id="search-input" placeholder="Search restaurants, dishes or cuisines" aria-label="Search products">
+        </div>
+      </div>
+      <div class="actions">
+        <div id="auth-area" class="auth-area"></div>
+        <button id="cart-btn" aria-label="Open cart">Cart (<span id="cart-count">0</span>)</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <h2>Featured Products</h2>
+        <p>Simple demo of a storefront like Amazon (static).</p>
+      </section>
+
+      <section id="products" class="products-grid"></section>
+    </main>
+
+    <aside id="cart" class="cart">
+      <div class="cart-header">
+        <h3>Your Cart</h3>
+        <button id="close-cart">Close</button>
+      </div>
+      <ul id="cart-items" class="cart-items"></ul>
+      <div class="cart-footer">
+        <div>Total: $<span id="cart-total">0.00</span></div>
+        <button id="checkout">Checkout</button>
+      </div>
+    </aside>
+
+    <div id="product-modal" class="modal" aria-hidden="true">
+      <div class="modal-body">
+        <button id="modal-close" class="modal-close">×</button>
+        <div class="modal-content">
+          <img id="modal-img" src="" alt="">
+          <div class="modal-meta">
+            <h3 id="modal-title"></h3>
+            <p id="modal-desc"></p>
+            <div class="modal-actions">
+              <div class="price">$<span id="modal-price">0.00</span></div>
+              <button id="modal-add">Add to cart</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/script.js"></script>
+  </body>
+</html>

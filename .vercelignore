@@ -1,0 +1,10 @@
+# Ignore files not needed for static deployment
+node_modules
+.git
+*.log
+.DS_Store
+run-local.ps1
+run-local.bat
+README.md
+*.ps1
+*.bat
