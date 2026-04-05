@@ -109,16 +109,17 @@ function renderProducts(){
   
   productsEl.innerHTML = filtered.map(p=>`
     <article class="product">
-      <div class="prod-top">
-        <img src="${p.image}" alt="${p.title}" data-id="${p.id}">
-        <div class="prod-info">
-          <div class="title">${p.title}</div>
-          <div class="meta">${p.cuisine} • ${p.rating} ★ • ${p.time} mins</div>
-          <div class="restaurant">${p.restaurant}</div>
-          <div class="row">
-            <div class="price">₹${p.price}</div>
-            <button class="add-btn" data-id="${p.id}">Add</button>
-          </div>
+      <div class="product-img" data-id="${p.id}">
+        <img src="${p.image}" alt="${p.title}">
+        <span class="product-badge">${p.cuisine}</span>
+      </div>
+      <div class="product-info">
+        <div class="title">${p.title}</div>
+        <div class="meta">${p.rating} ★ • ${p.time} mins</div>
+        <div class="restaurant">${p.restaurant}</div>
+        <div class="product-row">
+          <div class="price">₹${p.price}</div>
+          <button class="add-btn" data-id="${p.id}">Add</button>
         </div>
       </div>
     </article>`).join('');
@@ -127,8 +128,8 @@ function renderProducts(){
     btn.addEventListener('click',()=>addToCart(Number(btn.dataset.id)));
   });
 
-  productsEl.querySelectorAll('img[data-id]').forEach(img=>{
-    img.addEventListener('click',()=>openModal(Number(img.dataset.id)));
+  productsEl.querySelectorAll('.product-img[data-id]').forEach(el=>{
+    el.addEventListener('click',()=>openModal(Number(el.dataset.id)));
   });
 }
 
@@ -167,14 +168,12 @@ function updateCartUI(){
     const li = document.createElement('li');
     li.className = 'cart-item';
     li.innerHTML = `
-      <img src="${item.image}" alt="${item.title}" style="width:64px;height:48px;object-fit:cover;border-radius:6px">
-      <div style="flex:1;padding-left:8px">
-        <div style="font-weight:700">${item.title}</div>
-        <div style="font-size:13px;color:#666">₹${item.price} × ${item.qty}</div>
+      <img src="${item.image}" alt="${item.title}">
+      <div class="cart-item-info">
+        <div class="item-title">${item.title}</div>
+        <div class="item-price">₹${item.price} × ${item.qty}</div>
       </div>
-      <div>
-        <button data-remove="${item.id}" style="padding:4px 8px;font-size:12px">Remove</button>
-      </div>`;
+      <button class="cart-item-remove" data-remove="${item.id}">Remove</button>`;
     cartItemsEl.appendChild(li);
   });
   cartCount.textContent = cart.reduce((s,i)=>s+i.qty,0);
@@ -233,6 +232,9 @@ function openModal(id){
   modalImg.alt = p.title;
   modalTitle.textContent = p.title;
   modalDesc.textContent = p.desc || '';
+  document.getElementById('modal-rating').textContent = p.rating;
+  document.getElementById('modal-time').textContent = p.time;
+  document.getElementById('modal-time2').textContent = p.time;
   modalPrice.textContent = p.price;
   modal.setAttribute('aria-hidden','false');
 }
