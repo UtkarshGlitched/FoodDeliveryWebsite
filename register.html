@@ -80,14 +80,6 @@
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     <script src="js/config.js"></script>
     <script src="js/google-auth.js"></script>
-    <script>
-      window.addEventListener('load', ()=>{
-        const inited = window.initGoogleSignIn && window.initGoogleSignIn();
-        if(!inited){
-          const fallback = document.getElementById('google-register'); if(fallback) fallback.style.display='inline-flex';
-        } else { const fallback = document.getElementById('google-register'); if(fallback) fallback.style.display='none'; }
-      });
-    </script>
     <script src="js/register.js"></script>
   </body>
 </html>

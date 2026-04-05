@@ -54,19 +54,6 @@
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     <script src="js/config.js"></script>
     <script src="js/google-auth.js"></script>
-    <script>
-      // initialize Google Identity once the GIS script loads
-      window.addEventListener('load', ()=>{
-        const inited = window.initGoogleSignIn && window.initGoogleSignIn();
-        if(!inited){
-          // show fallback demo button if no CLIENT_ID provided
-          const fallback = document.getElementById('google-login'); if(fallback) fallback.style.display='inline-flex';
-        } else {
-          // hide fallback if inited
-          const fallback = document.getElementById('google-login'); if(fallback) fallback.style.display='none';
-        }
-      });
-    </script>
     <script src="js/auth.js"></script>
   </body>
 </html>
