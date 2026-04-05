@@ -1,3 +1,11 @@
+const SESSION_DURATION = 24 * 60 * 60 * 1000;
+
+function saveUserSession(user){
+  user.createdAt = Date.now();
+  user.expiresAt = Date.now() + SESSION_DURATION;
+  localStorage.setItem('foodies_home_user', JSON.stringify(user));
+}
+
 function validateEmail(e){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e); }
 function validatePhone(p){ return /^\+?[0-9\-\s()]{7,20}$/.test(p); }
 
@@ -35,7 +43,6 @@ document.getElementById('register-form').addEventListener('submit', function(e){
   const email = document.getElementById('email').value.trim();
   const password = document.getElementById('password').value;
   const confirm = document.getElementById('confirm').value;
-  // address fields removed from form; keep optional profile minimal for signup
   const agree = document.getElementById('agree').checked;
   const errorEl = document.getElementById('error');
   errorEl.textContent = '';
@@ -47,24 +54,20 @@ document.getElementById('register-form').addEventListener('submit', function(e){
   if(password !== confirm){ errorEl.textContent = 'Passwords do not match.'; return; }
   if(!agree){ errorEl.textContent = 'You must agree to the Terms & Privacy.'; return; }
 
-  // Demo: store user profile (do NOT store plaintext passwords in production)
-  const profile = { fullname, phone, email, createdAt: Date.now() };
-  localStorage.setItem('foodies_home_user', JSON.stringify(profile));
+  saveUserSession({ fullname, phone, email });
 
-  // redirect to main page
   const params = new URLSearchParams(location.search);
   const next = params.get('next') || 'index.html';
   location.href = next;
 });
 
-// Demo Google-register stub
 const googleRegister = document.getElementById('google-register');
 if(googleRegister){
   googleRegister.addEventListener('click', ()=>{
     const email = prompt('Enter Google email for demo register');
     if(!email) return;
-    const profile = { email, fullname: email.split('@')[0], provider: 'google', createdAt: Date.now() };
-    localStorage.setItem('foodies_home_user', JSON.stringify(profile));
+    const profile = { email, fullname: email.split('@')[0], provider: 'google' };
+    saveUserSession(profile);
     const next = new URLSearchParams(location.search).get('next') || 'index.html';
     location.href = next;
   });

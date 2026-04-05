@@ -1,6 +1,8 @@
 // Google Identity Services integration (client-side)
 // Requires: js/config.js must set window.GOOGLE_CLIENT_ID
 
+const SESSION_DURATION = 24 * 60 * 60 * 1000;
+
 function base64UrlDecode(str){
   str = str.replace(/-/g, '+').replace(/_/g, '/');
   while (str.length % 4) str += '=';
@@ -14,6 +16,8 @@ function decodeJwtPayload(jwt){
 }
 
 function saveProfileAndRedirect(profile){
+  profile.loggedAt = Date.now();
+  profile.expiresAt = Date.now() + SESSION_DURATION;
   localStorage.setItem('foodies_home_user', JSON.stringify(profile));
   const next = new URLSearchParams(location.search).get('next') || 'index.html';
   location.href = next;

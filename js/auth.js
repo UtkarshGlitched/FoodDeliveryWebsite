@@ -1,3 +1,11 @@
+const SESSION_DURATION = 24 * 60 * 60 * 1000;
+
+function saveUserSession(user){
+  user.loggedAt = Date.now();
+  user.expiresAt = Date.now() + SESSION_DURATION;
+  localStorage.setItem('foodies_home_user', JSON.stringify(user));
+}
+
 const params = new URLSearchParams(location.search);
 const action = params.get('action');
 const nameInput = document.getElementById('name');
@@ -41,27 +49,25 @@ if(loginForm){
   if(!email){ errorEl.textContent = 'Please enter your email.'; return; }
   if(!password){ errorEl.textContent = 'Please enter your password.'; return; }
 
-  // Demo-only: registration stores name as well
   if(action === 'register'){
     const name = (nameInput && nameInput.value.trim()) || '';
     if(!name){ errorEl.textContent = 'Please enter your full name.'; return; }
-    localStorage.setItem('foodies_home_user', JSON.stringify({email,name,loggedAt:Date.now()}));
+    saveUserSession({email,name});
   } else {
-    localStorage.setItem('foodies_home_user', JSON.stringify({email,loggedAt:Date.now()}));
+    saveUserSession({email});
   }
   const next = params.get('next') || 'index.html';
   location.href = next;
   });
 }
 
-// Demo Google sign-in stub for login page
 const googleLogin = document.getElementById('google-login');
 if(googleLogin){
   googleLogin.addEventListener('click', ()=>{
     const email = prompt('Enter Google email for demo sign-in');
     if(!email) return;
-    const profile = { email, name: email.split('@')[0], provider: 'google', loggedAt: Date.now() };
-    localStorage.setItem('foodies_home_user', JSON.stringify(profile));
+    const profile = { email, name: email.split('@')[0], provider: 'google' };
+    saveUserSession(profile);
     const next = new URLSearchParams(location.search).get('next') || 'index.html';
     location.href = next;
   });
